@@ -38,10 +38,10 @@ map.on('click', function (e) {
     redrawLine();
 });
 
-
+let line;
 let redrawLine = function () {
     // 라인 객체를 생성합니다.
-    var line = new maptalks.LineString(pointcodi, {
+     line = new maptalks.LineString(pointcodi, {
         symbol: {
             lineColor: '#de3333',
             lineWidth: 3
@@ -60,7 +60,7 @@ let redrawLine = function () {
 
     //line 정보 geometry 변환
     let geojson = JSON.stringify(line.toGeoJSON());
-
+    console.log(geojson);
     //html 삽입
     //document.getElementById('info').innerHTML = geojson;
 

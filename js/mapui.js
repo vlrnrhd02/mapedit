@@ -19,6 +19,7 @@ var map = new maptalks.Map('map', {
 });
 
 
+
 /**
  * 
  * toolbarcontrol

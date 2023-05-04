@@ -18,6 +18,13 @@ async function readZipFile(file) {
     });
 }
 
+/**
+ * const rectangle = new Rectangle(20, 20, 'red');
+   rectangle.draw();
+   console.log(rectangle.getArea());
+ * 
+*/
+
 
 /**
  * 
@@ -48,18 +55,25 @@ fileInput.addEventListener("change", async (e) => {
                 visible : true,
                 editable : true,
                 cursor : 'pointer',
-                draggable : false,
-                dragShadow : false, // display a shadow during dragging
+                draggable : true,
+                dragShadow : true, // display a shadow during dragging
                 drawOnAxis : null,  // force dragging stick on a axis, can be: x, y
                 symbol: {
                   'lineColor' : '#34495e',
                   'lineWidth' : 25,
                   'polygonFill' : 'rgb(255,255,255)',
                   'polygonOpacity' : 0.6
-                }
+                },
+                //움직일때마다 안끊기고 보여줌
+                drawImmediate: true,
+                forceRenderOnMoving:true,
+                forceRenderOnZooming:true,
+                forceRenderOnRotating :true,
             });
             shplayer.addGeometry(geojson.features);
             map.addLayer(shplayer);
+
+            console.log(shplayer.getMask());
 
         } catch (error) {
             alert(error);

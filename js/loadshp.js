@@ -32,7 +32,7 @@ async function readZipFile(file) {
 */
 const fileInput = document.getElementById("file-input");
 
-fileInput.addEventListener("change", async (e) => {
+fileInput.addEventListener("click", async (e) => {
 
     const file = e.target.files[0];
 
@@ -50,8 +50,8 @@ fileInput.addEventListener("change", async (e) => {
             map.addLayer(shplayer);
             console.log(shplayer);
             */
-            
-            let shplayer = new maptalks.VectorLayer({
+            let shplayer
+            shplayer = new maptalks.VectorLayer({
                 visible : true,
                 editable : true,
                 cursor : 'pointer',
@@ -72,8 +72,7 @@ fileInput.addEventListener("change", async (e) => {
             });
             shplayer.addGeometry(geojson.features);
             map.addLayer(shplayer);
-
-            console.log(shplayer.getMask());
+            shplayer.startEdit();
 
         } catch (error) {
             alert(error);

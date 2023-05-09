@@ -1,0 +1,148 @@
+{
+    "type": "FeatureCollection",
+    "features": [{
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [126.93837995039962, 37.11058623913058]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [126.95425862776779, 37.114795650184504]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [126.9615542362883, 37.11274230817091]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [126.9569622944548, 37.105555172646945]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [126.9373499821379, 37.100078802079196]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [126.94511765944503, 37.10904615223242]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [126.94795007216476, 37.11263963960866]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [126.94709176527999, 37.11965500445169]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [126.95357198225997, 37.12335064254384]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [
+                [126.95850724684738, 37.11821776313619],
+                [126.97284097182296, 37.11972344383375]
+            ]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+                [
+                    [126.96799153792404, 37.11469298440622],
+                    [126.97206849562667, 37.11513786843997],
+                    [126.97168225752853, 37.10406290091092],
+                    [126.96528787123702, 37.10532928018992],
+                    [126.96803445326827, 37.114604007285806],
+                    [126.96799153792404, 37.11469298440622]
+                ]
+            ]
+        },
+      "properties": {
+        "fid": 1,
+        "UFID": "2006185330314011396400000000",
+        "GRND_FLR": 3,
+        "HEIGHT": 18.8
+      }
+    }]
+}

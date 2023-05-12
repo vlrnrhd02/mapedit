@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.min.js"></script>
+    <title>1-1</title>
+    <style>
+    html,body{
+        margin:0px;
+        height:100%;
+        width:100%
+    }
+    .container{
+        width:85%;
+        height:100%
+    }
+    </style>
+</head>
+<body>
+    <div id="map" class="container"></div>
+    <script>
+    var map = new maptalks.Map('map', {
+        center: [126.9516193340971, 37.10889214182006],
+        zoom: 15,
+        baseLayer: new maptalks.TileLayer('base', {
+            urlTemplate: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            subdomains: ["a", "b", "c", "d"],
+            attribution: '&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
+        }),
+    });
+    // GeoJSON 레이어를 생성합니다.
+    var geojson = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [126.9516193340971, 37.10889214182006]
+                },
+                "properties": {
+                    "name": "Point 1",
+                    "description": "This is point 1"
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [126.94, 37.108]
+                },
+                "properties": {
+                    "name": "Point 2",
+                    "description": "This is point 2"
+                }
+            }
+        ]
+    };
+
+    var layer = new maptalks.VectorLayer('layer', { // 레이어 생성
+        'drawImmediate': true,
+        'visible': true,
+        'editable': true
+    }).addTo(map);
+
+    layer.addGeometry(geojson);
+
+    // 이벤트 리스너를 추가합니다.
+    map.on('click', function (e) {
+        console.log(e.target);
+        
+        map.identify(
+            {
+              'coordinate' : e.coordinate,
+              'layers' : [layer]
+            },
+            function(geos){
+                if (geos.length === 0) {
+                    return;
+                }
+
+                geos.forEach(function (g) {
+                    console.log(g.properties);
+                    let properties = g.properties;
+                    //var properties = target.getProperties();
+                    // 속성 창을 생성합니다.
+                    var modal = document.createElement('div');
+                    modal.innerHTML = '<h4>Properties</h4><table><tr><td>Name:</td><td><input id="name" value="' + properties.name + '"/></td></tr><tr><td>Description:</td><td><textarea id="description">' + properties.description + '</textarea></td></tr></table>';
+                    // "Apply" 버튼을 추가합니다.
+                    var applyButton = document.createElement('button');
+                    applyButton.innerText = 'Apply';
+                    applyButton.className = 'btn btn-primary';
+                    modal.appendChild(applyButton);
+                    // 모달을 표시합니다.
+                    var dialog = new maptalks.ui.InfoWindow({
+                        'title': 'Edit Properties',
+                        'content': modal,
+                        'autoCloseOn': '',
+                        'autoClose': false,
+                        'maxWidth': 400,
+                        'maxHeight': 400,
+                        'closable': true,
+                        'draggable': true,
+                        'fixed': true,
+                        'style': 'border:1px solid #ddd;',
+                        'closeButton': true
+                    });
+                    var infoWindow = new maptalks.ui.InfoWindow(dialog);
+                    infoWindow.addTo(map).show(e.coordinate);
+                    //dialog.show();
+                    // "Apply" 버튼에 이벤트 리스너를 추가합니다.
+                    /*
+                    applyButton.onclick = function () {
+                        // 속성 값을 업데이트합니다.
+                        target.setProperties({
+                            name: document.getElementById('name').value,
+                            description: document.getElementById('description').value
+                        });
+                        // 모달을 닫습니다.
+                        dialog.close();
+                    };
+                    */
+                })
+            }
+        )
+        var target = e.target;
+        if (target && target.getProperties) {
+            
+            var properties = target.getProperties();
+            // 속성 창을 생성합니다.
+            var modal = document.createElement('div');
+            modal.innerHTML = '<h4>Properties</h4><table><tr><td>Name:</td><td><input id="name" value="' + properties.name + '"/></td></tr><tr><td>Description:</td><td><textarea id="description">' + properties.description + '</textarea></td></tr></table>';
+            // "Apply" 버튼을 추가합니다.
+            var applyButton = document.createElement('button');
+            applyButton.innerText = 'Apply';
+            applyButton.className = 'btn btn-primary';
+            modal.appendChild(applyButton);
+            // 모달을 표시합니다.
+            var dialog = new maptalks.ui.Dialog({
+                'title': 'Edit Properties',
+                'content': modal,
+                'autoCloseOn': '',
+                'autoClose': false,
+                'maxWidth': 400,
+                'maxHeight': 400,
+                'closable': true,
+                'draggable': true,
+                'fixed': true,
+                'style': 'border:1px solid #ddd;',
+                'closeButton': true
+            });
+            dialog.show();
+            // "Apply" 버튼에 이벤트 리스너를 추가합니다.
+            applyButton.onclick = function () {
+                // 속성 값을 업데이트합니다.
+                target.setProperties({
+                    name: document.getElementById('name').value,
+                    description: document.getElementById('description').value
+                });
+                // 모달을 닫습니다.
+                dialog.close();
+            };
+        }
+    });
+    </script>
+</body>
+</html>

@@ -23,31 +23,42 @@
 
     <!-- shp start -->
     <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>
+    <script src="https://unpkg.com/shp-write@latest/shpwrite.js"></script>
+    
     <!-- shp end -->
 <!--    
 -->
 </head>
 <body>
     <div id="map" class="container"></div>
-
+    <div id="info" class="info"></div>
     
     <!--
     <div id="info"></div>
     -->
     
+    <!--
     <div class="map-crtl-top-left pane">
         <input type="file" id="file-input" accept=".zip" />
+        
+        <button>
+            파일 다운로드
+        </button>
     </div>
-    
-    <script src="./js/mapui.js"> </script>
+    -->
+
+
+    <script src="./js/mapui.js" type="module"> </script>
     <!--
+    <script src="./js/fileLoad.js"> </script>
+    
     <script src="./js/mapui.js"> </script>
     <script src="./js/mapui copy.js"> </script>
     <script src="./js/test.js"> </script>
     <script src="./js/editlayer.js"> </script>
     -->
     <!--
-    <script src="./js/loadshp.js"> </script>
+    
     -->
 </body>
 </html>

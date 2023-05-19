@@ -301,7 +301,19 @@ let bLtoolbar = new maptalks.control.Toolbar({
             });
             map.setBaseLayer(newBaseLayer);
           },
-        }     
+        },
+        {
+          //에헤이..
+          item: '3d',
+          click: function() {
+            let newBaseLayer = new maptalks.ImageLayer('images', {
+              urlTemplate: 'https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer',
+              subdomains: ["a", "b", "c", "d"],
+              attribution: 'v-world'
+            });
+            map.setBaseLayer(newBaseLayer);
+          },
+        }      
       ]
     }
   ]

@@ -1,11 +1,241 @@
-html,body{
-    margin:0px;
-    height:100%;
-    width:100%
+*, ::before, ::after{
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x: ;
+    --tw-pan-y: ;
+    --tw-pinch-zoom: ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-ordinal: ;
+    --tw-slashed-zero: ;
+    --tw-numeric-figure: ;
+    --tw-numeric-spacing: ;
+    --tw-numeric-fraction: ;
+    --tw-ring-inset: ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur: ;
+    --tw-brightness: ;
+    --tw-contrast: ;
+    --tw-grayscale: ;
+    --tw-hue-rotate: ;
+    --tw-invert: ;
+    --tw-saturate: ;
+    --tw-sepia: ;
+    --tw-drop-shadow: ;
+    --tw-backdrop-blur: ;
+    --tw-backdrop-brightness: ;
+    --tw-backdrop-contrast: ;
+    --tw-backdrop-grayscale: ;
+    --tw-backdrop-hue-rotate: ;
+    --tw-backdrop-invert: ;
+    --tw-backdrop-opacity: ;
+    --tw-backdrop-saturate: ;
+    --tw-backdrop-sepia: ;
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
 }
+head {
+    display: none;
+}
+
+html{
+    height: 100%;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-family: "Open Sans",sans-serif;
+    font-feature-settings: normal;
+}
+/*All*/
+body#webgis-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans','Helvetica Neue',sans-serif;
+    font-size: 15px;
+    line-height: 20px;
+    color: #222;
+    -webkit-font-smoothing: antialiased;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.flex-col{
+    flex-direction: column;
+}
+.h-full{
+    height: 100%;
+}
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+.text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.font-sans {
+    font-family: "Open Sans",sans-serif;
+}
+
+@media (min-width: 768px){
+    .md\:flex {
+        display: flex;
+    }
+}
+.rounded {
+    border-radius: 0.25rem;
+}
+.py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.bg-mb-gray-dark{
+    --tw-bg-opacity: 1;
+    background-color: rgb(14 33 39 / var(--tw-bg-opacity));
+}
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+.justify-end {
+    justify-content: flex-end;
+}
+
+.font-extrabold{
+    font-weight: 800;
+} 
+.items-center{
+    align-items: center;
+} 
+.tracking-wide{
+    letter-spacing: 0.025em;
+} 
+.text-base{
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+/*
 .container{
-    width:85%;
-    height:100%
+
+} 
+*/
+.grow{
+    flex-grow: 1;
+} 
+.flex-shrink-0{
+    flex-shrink: 0;
+} 
+@media (min-width: 768px){
+    .md:flex-row{
+        flex-direction: row;
+    } 
+}
+.w-full{
+    width: 100%;
+} 
+.relative{
+    position: relative;
+} 
+.overflow-x-hidden{
+    overflow-x: hidden;
+}
+
+
+/*
+map
+*/
+.map{
+
+}  
+.top-0{
+    top: 0px;
+} 
+.bottom-0{
+    bottom: 0px;
+} 
+.left-0{
+    left: 0px;
+} 
+.basis-0{
+    flex-basis: 0px;
+} 
+.transition-all{
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+    transition-duration: 150ms;
+} 
+.duration-300{
+    transition-duration: 300ms;
+} 
+.mapboxgl-map{
+    -webkit-tap-highlight-color: rgb(0 0 0/0);
+    font: 12px/20px Helvetica Neue,Arial,Helvetica,sans-serif;
+    overflow: hidden;
+    position: relative;
+} 
+/*
+다른 영역인듯..
+*/
+.mode-simple_select{
+
+} 
+.mouse-none{
+
+}
+
+.right {
+    transition: all 200ms;
+    -webkit-transition: all 200ms;
+    box-shadow: rgba(0,0,0,0.1) -2px 0px 0px;
+}
+
+
+    .md\:max-w-md {
+        max-width: 28rem;
+    }
+
+
+
+/*
+rigjt
+*/
+/* 
+.container{
+    width:100%;
+    height:100%;
 }
 .info{
     position:fixed;
@@ -16,7 +246,7 @@ html,body{
     top:0px;
     width:15%;
     height:100%;
-    overflow:hidden
+    overflow:hidden;
 }
 .pane{
     background:#34495e;
@@ -36,12 +266,12 @@ html,body{
     right: 20px;
     top: 20px;
 }
-.content{color:#fff;width:190px;height:128px;background-color:#051127;border:1px solid #0c2c45}
-.pop_title{float:left;padding-left:10px;width:180px;height:36px;line-height:36px;background:url(title.png);font-weight:bold;font-size:16px}
-.pop_time{float:left;width:183px;height:30px;margin:0 10px;line-height:36px}
-.pop_dept{float:left;padding:5px;max-width:65px;line-height:15px;text-align:center;border:1px solid #192b41;margin:0 10px}
-.pop_arrow{float:left;width:15px;height:24px;line-height:24px;background:url(arrow.png) no-repeat center center}
-.arrow{display:block;width:17px;height:10px;background:url(em.png) no-repeat;position:absolute;left:50%;margin-left:-5px;bottom:-10px}
+.content{color:#fff;width:190px;height:128px;background-color:#051127;border:1px solid #0c2c45};
+.pop_title{float:left;padding-left:10px;width:180px;height:36px;line-height:36px;background:url(title.png);font-weight:bold;font-size:16px};
+.pop_time{float:left;width:183px;height:30px;margin:0 10px;line-height:36px};
+.pop_dept{float:left;padding:5px;max-width:65px;line-height:15px;text-align:center;border:1px solid #192b41;margin:0 10px};
+.pop_arrow{float:left;width:15px;height:24px;line-height:24px;background:url(arrow.png) no-repeat center center};
+.arrow{display:block;width:17px;height:10px;background:url(em.png) no-repeat;position:absolute;left:50%;margin-left:-5px;bottom:-10px}; */
 
 
 

@@ -52,6 +52,9 @@ var items = ['Point', 'LineString', 'Polygon'].map(function (value) {
     item: value,
     click: function () {
       drawTool.setMode(value).enable();
+    },
+    contextmenu: function () {
+      drawTool.disable();
     }
   };
 });

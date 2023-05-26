@@ -12,6 +12,11 @@ import creategeom from './creategeom.js';
 var map = new maptalks.Map('map', {
   center: [126.9516193340971, 37.10889214182006],
   zoom: 15,
+  pitch : 45,
+  attribution: true,
+  zoomControl : true, // add zoom control
+  scaleControl : true, // add scale control
+  overviewControl : true, // add overview control
   baseLayer: new maptalks.TileLayer('base', {
     urlTemplate: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
     subdomains: ["a", "b", "c", "d"],
@@ -20,12 +25,13 @@ var map = new maptalks.Map('map', {
 
 
 });
+
+
 var zoomControl = new maptalks.control.Zoom({
   'position': 'top-right',
   'slider': true,
   'zoomLevel': true
 }).addTo(map);
-
 //제일 중요
 var layer = new maptalks.VectorLayer('vector').addTo(map);
 
@@ -34,9 +40,6 @@ var drawTool = new maptalks.DrawTool({
 }).addTo(map).disable();
 
 drawTool.on('drawend', function (param) {
-  console.log(param.geometry);
-  
-  let point = [];
   if (param.geometry.type == "Point") {
     layer.setId('Point');
   } else if (param.geometry.type == "LineString") {
@@ -47,17 +50,60 @@ drawTool.on('drawend', function (param) {
   layer.addGeometry(param.geometry);
 });
 
+function formatGeoJSON(geoJSONText) {
+  try {
+    const geoJSONObject = JSON.parse(geoJSONText);
+    const formattedGeoJSON = JSON.stringify(geoJSONObject, null, 2);
+    return formattedGeoJSON;
+  } catch (error) {
+    console.error('Invalid GeoJSON format:', error);
+    return null;
+  }
+}
+
+function addLineBreaks(geoJSONText) {
+  const lines = geoJSONText.split('\n');
+  const formattedLines = lines.map(line => line.trim()).join('\n');
+  return formattedLines;
+}
+
+function formatAndAddLineBreaks(geoJSONText) {
+  const formattedGeoJSON = formatGeoJSON(geoJSONText);
+  if (!formattedGeoJSON) {
+    return null;
+  }
+  const formattedWithLineBreaks = addLineBreaks(formattedGeoJSON);
+  return formattedWithLineBreaks;
+}
+/*
+const formattedWithLineBreaks = formatAndAddLineBreaks(geoJSONText);
+console.log(formattedWithLineBreaks);
+*/
+map.addEventListener('click', function (e) {
+  if(drawTool._enabled == true){
+    console.log(drawTool._enabled);
+    console.log(fileDownLoad.getGeoJsonFromLayer(layer));
+    //document.getElementById("innerJson").innerHTML = formatAndAddLineBreaks(fileDownLoad.getGeoJsonFromLayer(layer));
+  }else{
+    console.log(drawTool._enabled);
+  }
+});
+
 var items = ['Point', 'LineString', 'Polygon'].map(function (value) {
   return {
     item: value,
     click: function () {
       drawTool.setMode(value).enable();
+      
     },
+
     contextmenu: function () {
       drawTool.disable();
     }
   };
 });
+
+
 
 var Rtoolbar = new maptalks.control.Toolbar({
   position : 'top-right',
@@ -78,6 +124,7 @@ var Rtoolbar = new maptalks.control.Toolbar({
         layer.clear();
       }
     },
+    
     {
       item: '레이어 편집',
       click: function () {
@@ -91,6 +138,7 @@ var Rtoolbar = new maptalks.control.Toolbar({
               'coordinate' : e.coordinate,
               'layers' : [layer]
             },
+            
             function (geos) {
               if (geos.length === 0) {
                 return;
@@ -98,6 +146,8 @@ var Rtoolbar = new maptalks.control.Toolbar({
               geos.forEach(function (g) {
                 console.log(g);
                 let coordinate = e.coordinate;
+                
+                
                 var options = {
                   //'autoOpenOn' : 'click',  //set to null if not to open window when clicking on map
                   'layers' : [layer],
@@ -118,8 +168,8 @@ var Rtoolbar = new maptalks.control.Toolbar({
                     '<div class="arrow"></div>' +
                     '</div>'
                 };
-                var infoWindow = new maptalks.ui.InfoWindow(options);
-                infoWindow.addTo(map).show(coordinate);
+                //var infoWindow = new maptalks.ui.InfoWindow(options);
+                //infoWindow.addTo(map).show(coordinate);
                 g.startEdit();
               });
             }
@@ -251,73 +301,77 @@ var Ltoolbar = new maptalks.control.Toolbar({
 
 
 let bLtoolbar = new maptalks.control.Toolbar({
-  position : {'bottom': 150,'right': 0},
-  items: [
-    {
-      item: 'haha',
-      click: function() {
-
+  //position : {'bottom': 150,'left': 70},
+  'position' : {'bottom': 50,'left': 20},
+  'reverseMenu' : true,
+  'items'     : [{
+    item: '지도',
+    click : function () {},
+    children : [
+      {
+        item: 'openstreet',
+        click: function() {
+          let newBaseLayer = new maptalks.TileLayer('newBaseLayer', {
+            'urlTemplate': 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            'subdomains': ['a', 'b', 'c'],
+            'attribution': '&copy; OpenStreetMap contributors'
+          });
+          
+          // 지도 객체에 새로운 베이스 레이어를 설정합니다.
+          map.setBaseLayer(newBaseLayer);
+        },
       },
-      children : [
-        {
-          item: 'openstreet',
-          click: function() {
-            let newBaseLayer = new maptalks.TileLayer('newBaseLayer', {
-              'urlTemplate': 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              'subdomains': ['a', 'b', 'c'],
-              'attribution': '&copy; OpenStreetMap contributors'
-            });
-            
-            // 지도 객체에 새로운 베이스 레이어를 설정합니다.
-            map.setBaseLayer(newBaseLayer);
-          },
+      {
+        item: 'carto',
+        click: function() {
+          let newBaseLayer = new maptalks.TileLayer('newBaseLayer', {
+            urlTemplate: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            subdomains: ["a", "b", "c", "d"],
+            attribution: '&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
+          });
+          map.setBaseLayer(newBaseLayer);
         },
-        {
-          item: 'carto',
-          click: function() {
-            let newBaseLayer = new maptalks.TileLayer('newBaseLayer', {
-              urlTemplate: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-              subdomains: ["a", "b", "c", "d"],
-              attribution: '&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
-            });
-            map.setBaseLayer(newBaseLayer);
-          },
+      },
+      {
+        item: '위성',
+        click: function() {
+          let newBaseLayer = new maptalks.TileLayer('newBaseLayer', {
+            urlTemplate: 'https://xdworld.vworld.kr/2d/Satellite/service/{z}/{x}/{y}.jpeg',
+            subdomains: ["a", "b", "c", "d"],
+            attribution: 'v-world'
+          });
+          map.setBaseLayer(newBaseLayer);
         },
-        {
-          item: '위성',
-          click: function() {
-            let newBaseLayer = new maptalks.TileLayer('newBaseLayer', {
-              urlTemplate: 'https://xdworld.vworld.kr/2d/Satellite/service/{z}/{x}/{y}.jpeg',
-              subdomains: ["a", "b", "c", "d"],
-              attribution: 'v-world'
-            });
-            map.setBaseLayer(newBaseLayer);
-          },
+      },
+      {
+        item: 'v-world',
+        click: function() {
+          let newBaseLayer = new maptalks.TileLayer('newBaseLayer', {
+            urlTemplate: 'https://xdworld.vworld.kr/2d/white/service/{z}/{x}/{y}.png',
+            subdomains: ["a", "b", "c", "d"],
+            attribution: 'v-world'
+          });
+          map.setBaseLayer(newBaseLayer);
         },
-        {
-          item: 'v-world',
-          click: function() {
-            let newBaseLayer = new maptalks.TileLayer('newBaseLayer', {
-              urlTemplate: 'https://xdworld.vworld.kr/2d/white/service/{z}/{x}/{y}.png',
-              subdomains: ["a", "b", "c", "d"],
-              attribution: 'v-world'
-            });
-            map.setBaseLayer(newBaseLayer);
-          },
+      },
+      {
+        //에헤이..
+        item: '3d',
+        click: function() {
+          let newBaseLayer = new maptalks.ImageLayer('images', {
+            urlTemplate: 'https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer',
+            subdomains: ["a", "b", "c", "d"],
+            attribution: 'v-world'
+          });
+          map.setBaseLayer(newBaseLayer);
         },
-        {
-          //에헤이..
-          item: '3d',
-          click: function() {
-            let newBaseLayer = new maptalks.ImageLayer('images', {
-              urlTemplate: 'https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer',
-              subdomains: ["a", "b", "c", "d"],
-              attribution: 'v-world'
-            });
-            map.setBaseLayer(newBaseLayer);
-          },
-        }      
-      ]
-    }
-  ]
+      }      
+    ]
+  }, {
+    item: '테스트',
+    click : function () { info('item 2'); }
+  }, {
+    item: '테스트',
+    click : function () { info('item 3'); }
+  }]
 }).addTo(map);

@@ -78,6 +78,23 @@ const fileDownLoad = {
         });
         }
         
+    },
+
+    mapEventListener : function(map){
+        map.on('click', function (e) {
+            map.identify(
+                function (geos){
+                    if (geos.length === 0) {
+                        return;
+                    }
+
+                    g.forEach(function (g){
+                        console(g);
+                    });
+
+                }
+            )
+        })
     }
     
 }

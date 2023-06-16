@@ -1,12 +1,12 @@
-//file Load 
+//file Load
 import fileLoad from './fileLoad.js';
 import fileDownLoad from './fileDownLoad.js';
 import distanceTool from './distanceTool.js';
 import creategeom from './creategeom.js';
-
+import Newdownload from './testClass.js';
 
 /**
- * 
+ *
  * create map
 */
 var map = new maptalks.Map('map', {
@@ -79,9 +79,13 @@ function formatAndAddLineBreaks(geoJSONText) {
 const formattedWithLineBreaks = formatAndAddLineBreaks(geoJSONText);
 console.log(formattedWithLineBreaks);
 */
+
 map.addEventListener('click', function (e) {
   if(drawTool._enabled == true){
     console.log(drawTool._enabled);
+    let z = new Newdownload(layer);
+    console.log(z);
+
     console.log(fileDownLoad.getGeoJsonFromLayer(layer));
     //document.getElementById("innerJson").innerHTML = formatAndAddLineBreaks(fileDownLoad.getGeoJsonFromLayer(layer));
   }else{
@@ -94,7 +98,7 @@ var items = ['Point', 'LineString', 'Polygon'].map(function (value) {
     item: value,
     click: function () {
       drawTool.setMode(value).enable();
-      
+
     },
 
     contextmenu: function () {
@@ -102,6 +106,34 @@ var items = ['Point', 'LineString', 'Polygon'].map(function (value) {
     }
   };
 });
+
+// layer 클릭 이벤트 핸들러 함수
+function handleClickEvent(e) {
+  var target = e.target; // 클릭한 요소(레이어) 가져오기
+  //var properties = target.getProperties(); // 레이어의 속성 정보 가져오기
+  /*
+  let popupopt = {
+    'content'   :
+    '<div class="content">' +
+    '<div class="pop_title">속성 편집</div>' +
+    '<div class="pop_time">' + new Date().toLocaleTimeString() + '</div><br>' +
+    '<div class="pop_dept">' + coordinate.x + '</div>' +
+    '<div class="pop_dept">' + coordinate.y + '</div>' +
+    '<div class="pop_dept">' + layer + '</div>' +
+    '<div class="arrow"></div>' +
+    '</div>'
+  }
+  */
+  // 속성 정보를 표시할 맵 팝업 생성
+  var popup = new maptalks.ui.InfoWindow({
+    title: "레이어 속성 정보",
+    content: JSON.stringify(layer),
+    autoCloseOn: "click",
+  });
+
+  // 클릭한 위치에 팝업을 표시하고 맵에 추가
+  popup.addTo(map).show(e.coordinate);
+}
 
 
 
@@ -124,52 +156,27 @@ var Rtoolbar = new maptalks.control.Toolbar({
         layer.clear();
       }
     },
-    
+
     {
       item: '레이어 편집',
       click: function () {
-        
+
         console.log(map.toJSON(layer))
         map.on('click', function (e) {
           //identify
+          handleClickEvent(e);
           map.identify(
             //targeting할 좌표와, 해당 좌표에 걸리는 레이어..
             {
               'coordinate' : e.coordinate,
               'layers' : [layer]
             },
-            
+
             function (geos) {
               if (geos.length === 0) {
                 return;
               }
               geos.forEach(function (g) {
-                console.log(g);
-                let coordinate = e.coordinate;
-                
-                
-                var options = {
-                  //'autoOpenOn' : 'click',  //set to null if not to open window when clicking on map
-                  'layers' : [layer],
-                  'autoCloseOn' : true,
-                  'single' : false,
-                  'width'  : 183,
-                  'height' : 105,
-                  'custom' : true,
-                  'dx' : e.coordinate.x,
-                  'dy' : e.coordinate.y,
-                  'content'   : 
-                    '<div class="content">' +
-                    '<div class="pop_title">속성 편집</div>' +
-                    '<div class="pop_time">' + new Date().toLocaleTimeString() + '</div><br>' +
-                    '<div class="pop_dept">' + coordinate.x + '</div>' +
-                    '<div class="pop_dept">' + coordinate.y + '</div>' +
-                    '<div class="pop_dept">' + layer + '</div>' +
-                    '<div class="arrow"></div>' +
-                    '</div>'
-                };
-                //var infoWindow = new maptalks.ui.InfoWindow(options);
-                //infoWindow.addTo(map).show(coordinate);
                 g.startEdit();
               });
             }
@@ -181,7 +188,6 @@ var Rtoolbar = new maptalks.control.Toolbar({
       item: '레이어 레이어 편집 중지',
       click: function () {
         layer.forEach(function (item) {
-          console.log(item);
           item.endEdit();
           //g.target.endEdit();
         });
@@ -254,21 +260,21 @@ var Ltoolbar = new maptalks.control.Toolbar({
     {
       item: '데이터 다운로드',
       click: function () {
-          
+
       },
       children : [
       //직관적이게 가자
       {
         item: 'json으로 다운로드',
         click : function (){
-          fileDownLoad.DownloadJson(layer); 
+          fileDownLoad.DownloadJson(layer);
           //document.getElementById('info').innerHTML = geojson;
         }
-      }, 
+      },
       {
         item: 'geojson으로 다운로드',
         click : function (){
-          fileDownLoad.DownloadGeojson(layer); 
+          fileDownLoad.DownloadGeojson(layer);
         }
       },
       {
@@ -316,7 +322,7 @@ let bLtoolbar = new maptalks.control.Toolbar({
             'subdomains': ['a', 'b', 'c'],
             'attribution': '&copy; OpenStreetMap contributors'
           });
-          
+
           // 지도 객체에 새로운 베이스 레이어를 설정합니다.
           map.setBaseLayer(newBaseLayer);
         },
@@ -365,7 +371,7 @@ let bLtoolbar = new maptalks.control.Toolbar({
           });
           map.setBaseLayer(newBaseLayer);
         },
-      }      
+      }
     ]
   }, {
     item: '테스트',

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        4100000000
+        4139000000	
+        10400
+        */
+        /*
+        -- 지역 코드(시흥시)
+        https://stcis.go.kr/openapi/areacode.json?apikey=20230530120744qh12im36ijl3uso0322k4m9sr9&sdCd=41&sggCd=41390
+        1) 버스 노선정보 API
+        https://stcis.go.kr/openapi/busroute.json?apikey=(인증받은 API키)&sdCd=(시도코드)&routeNo=(노선번호)
+        https://stcis.go.kr/openapi/busroute.json?apikey=20230530120744qh12im36ijl3uso0322k4m9sr9&sdCd=41390&routeNo=63
+        {
+            "count": 31,
+            "status": "OK",
+            "result": [{
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139012800",
+                "emdNm": "군자동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139010300",
+                "emdNm": "방산동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139012100",
+                "emdNm": "광석동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139013000",
+                "emdNm": "장곡동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139010400",
+                "emdNm": "포동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139013500",
+                "emdNm": "배곧동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139010600",
+                "emdNm": "은행동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139012500",
+                "emdNm": "논곡동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139011800",
+                "emdNm": "능곡동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139010700",
+                "emdNm": "안현동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139013200",
+                "emdNm": "정왕동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139012400",
+                "emdNm": "조남동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139012000",
+                "emdNm": "하상동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139011000",
+                "emdNm": "금이동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139012300",
+                "emdNm": "산현동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139011300",
+                "emdNm": "계수동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139012200",
+                "emdNm": "물왕동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139012700",
+                "emdNm": "거모동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139010100",
+                "emdNm": "대야동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139013100",
+                "emdNm": "월곶동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139011900",
+                "emdNm": "하중동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139013300",
+                "emdNm": "죽율동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139013400",
+                "emdNm": "무지내동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139011200",
+                "emdNm": "과림동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139011700",
+                "emdNm": "화정동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139012600",
+                "emdNm": "목감동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139010800",
+                "emdNm": "매화동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139010200",
+                "emdNm": "신천동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139012900",
+                "emdNm": "장현동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139010900",
+                "emdNm": "도창동"
+            }, {
+                "sdCd": "41",
+                "sdNm": "경기도",
+                "sggCd": "41390",
+                "sggNm": "시흥시",
+                "emdCd": "4139010500",
+                "emdNm": "미산동"
+            }]
+        }
+        {
+        //응답결과 건수 => 시도 코드네 63번의 버스 다불러옴
+        "count": 4,
+            "result": [{
+                //응답결과 노선ID
+                "routeId": "41042012",
+                //응갑결과 노선번호
+                "routeNo": "63",
+                //응답결과 기점
+                "stgSttnNma": "영화마을",
+                //응답결과 종점
+                "arrSttnNma": "영화아파트"
+            }, {
+                "routeId": "41032007",
+                "routeNo": "63",
+                "stgSttnNma": "오이도차고지",
+                "arrSttnNma": "오이도차고지"
+            }, {
+                "routeId": "41349006",
+                "routeNo": "63",
+                "stgSttnNma": "동부센트레빌.덕소아이파크",
+                "arrSttnNma": "동부센트레빌.덕소아이파크"
+            }, {
+                "routeId": "41031048",
+                "routeNo": "63",
+                "stgSttnNma": "이목동차고지.이목동입구",
+                "arrSttnNma": "파장동북부버스차고지(경유)"
+            }],
+            "status": "OK"
+        }
+
+
+        //버스 노선별 경유정류장번호 API
+        https://stcis.go.kr/openapi/busroutesttn.json?apikey=(인증받은 API키)&sdCd=(시도코드)&sggCd=(시군구코드)&emdCd=(읍면동코드)&routeId=(노선ID)
+        https://stcis.go.kr/openapi/busroutesttn.json?apikey=20230530120744qh12im36ijl3uso0322k4m9sr9&sdCd=41&sggCd=39010&emdCd=4139010100&routeId=63
+        
+        //버스정류정 번호 API
+        https://stcis.go.kr/openapi/bussttn.json?apikey=(인증받은 API키)&sdCd=(시도코드)&sggCd=(시군구코드)&emdCd=(읍면동코드)&sttnArsno=(정류장 ARS번호)
+        https://stcis.go.kr/openapi/bussttn.json?apikey=20230530120744qh12im36ijl3uso0322k4m9sr9&sdCd=41&sggCd=41390
+        */
+        const apikey = '20230530120744qh12im36ijl3uso0322k4m9sr9';
+        const sido = '41';
+        const sigungu = '390';
+        const eupmendong = '10400';
+        const nosunid = '63';
+        const Url = 'https://stcis.go.kr/openapi/busroutesttn.json?apikey='+apikey+'&sdCd='+sido+'&sggCd='+sigungu+'&emdCd='+eupmendong+'&routeId='+nosunid+'';
+
+        const Data = {
+            name: 'Said',
+            id: 23,
+        };
+
+        // 선택적 파라미터
+
+        const othePram = {
+            headers: {
+                'content-type': 'application/json, charset=UTF-8',
+            },
+            body: Data,
+            method: 'POST',
+            origin: '*'
+        };
+
+        fetch(Url, othePram)
+        .then((data) => {return data.json()})
+        .then((res) => {console.log(res)})
+        .catch((error) => console.log(error));
+    </script>
+</body>
+</html>
